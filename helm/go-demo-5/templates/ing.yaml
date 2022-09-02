@@ -16,8 +16,11 @@ spec:
   rules:
   - http:
       paths:
-      - backend:
-          serviceName: {{ $serviceName }}
-          servicePort: 8080
+      - pathType: ImplementationSpecific
+        backend:
+          service:
+            name: {{ $serviceName }}
+            port:
+              number: 8080
     host: {{ .Values.ingress.host }}
 {{- end -}}
