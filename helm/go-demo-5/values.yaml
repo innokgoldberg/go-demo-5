@@ -6,6 +6,9 @@ image:
 ingress:
   enabled: true
   host: acme.com
+prometheus:
+  enabled: true
+  releaseName: prometheus
 service:
   # Change to NodePort if ingress.enable=false
   type: ClusterIP

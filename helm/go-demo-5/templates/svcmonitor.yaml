@@ -1,0 +1,18 @@
+{{- if .Values.prometheus.enabled -}}
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: {{ template "helm.fullname" . }}
+  labels:
+    app: {{ template "helm.name" . }}
+    chart: {{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}
+    heritage: {{ .Release.Service }}
+    release: {{ .Values.prometheus.releaseName }}
+spec:
+  selector:
+    matchLabels:
+      app: {{ template "helm.name" . }}
+      release: {{ .Release.Name }}
+  endpoints:
+    - port: web
+{{- end -}}
